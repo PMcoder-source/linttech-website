@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LintTech Materials Inc. — Vancouver's Lint Recovery Platform</title>
+<meta name="description" content="LintTech collects dryer lint from hotels, hospitals and laundromats in Vancouver — diverting it from landfill and researching its potential as a recovered raw material.">
+<meta property="og:title" content="LintTech Materials Inc.">
+<meta property="og:description" content="Vancouver's first commercial dryer lint recovery platform. We collect, divert, and research.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://linttech.ca">
+<meta name="theme-color" content="#0A2342">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep:    #061426;
+  --navy:    #0A2342;
+  --teal:    #1B6CA8;
+  --mint:    #02A676;
+  --mint2:   #00C98A;
+  --sage:    #3D6B4F;
+  --cream:   #FAF7F2;
+  --sand:    #F2EDE4;
+  --leaf:    #E8F2EC;
+  --offwhite:#F5F3EF;
+  --mid:     #7A8A8F;
+  --slate:   #2C3A2E;
+  --gold:    #C17B2A;
+  --white:   #FFFFFF;
+  --fd: 'Playfair Display', Georgia, serif;
+  --fb: 'Outfit', sans-serif;
+  --fm: 'Fira Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--deep);color:var(--offwhite);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+#fc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.12}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(6,20,38,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(2,166,118,.1);transition:background .3s}
+.nl{display:flex;flex-direction:column;text-decoration:none}
+.nl-m{font-family:var(--fd);font-size:1.4rem;font-weight:600;color:var(--white);line-height:1}
+.nl-s{font-family:var(--fm);font-size:.52rem;color:var(--mint);letter-spacing:.2em;text-transform:uppercase;margin-top:3px}
+.nls{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nls a{font-size:.78rem;font-weight:500;color:rgba(245,243,239,.6);text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:color .2s}
+.nls a:hover{color:var(--mint2)}
+.nav-cta{background:var(--mint)!important;color:var(--deep)!important;padding:.5rem 1.3rem!important;font-weight:600!important}
+.nav-cta:hover{background:var(--mint2)!important}
+.hb{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hb span{display:block;width:22px;height:2px;background:var(--offwhite);transition:all .3s}
+
+/* ── MOBILE MENU ── */
+.mm{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,20,38,.99);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mm.open{display:flex}
+.mm a{font-family:var(--fd);font-size:2rem;font-weight:400;color:var(--white);text-decoration:none;transition:color .2s}
+.mm a:hover{color:var(--mint)}
+.mm-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;padding:.5rem}
+
+/* ── PAGE SECTIONS ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ════════════════════════════════
+   HOMEPAGE
+════════════════════════════════ */
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 5rem;z-index:1}
+.hi{max-width:1100px;margin:0 auto;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1.8rem;opacity:0;animation:fu .8s .2s ease forwards}
+.eyebrow-line{width:36px;height:1px;background:var(--mint)}
+.eyebrow-text{font-family:var(--fm);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint)}
+h1.hero-h{font-family:var(--fd);font-size:clamp(3rem,6.5vw,6rem);font-weight:400;line-height:1.06;color:var(--white);margin-bottom:1.4rem;opacity:0;animation:fu .9s .3s ease forwards}
+h1.hero-h em{font-style:italic;color:var(--mint)}
+.hero-sub{font-size:1.1rem;font-weight:300;color:rgba(245,243,239,.65);max-width:560px;line-height:1.75;margin-bottom:2.8rem;opacity:0;animation:fu .9s .45s ease forwards}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fu .9s .6s ease forwards}
+.btn-p{display:inline-flex;align-items:center;gap:.55rem;background:var(--mint);color:var(--deep);padding:.9rem 2rem;font-size:.88rem;font-weight:600;letter-spacing:.04em;text-decoration:none;border:none;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.btn-p::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,.15);transition:left .3s}
+.btn-p:hover::after{left:0}
+.btn-p:hover{background:var(--mint2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(2,166,118,.3)}
+.btn-s{display:inline-flex;align-items:center;gap:.55rem;color:var(--offwhite);padding:.9rem 2rem;font-size:.88rem;font-weight:400;text-decoration:none;border:1px solid rgba(245,243,239,.2);transition:all .25s}
+.btn-s:hover{border-color:var(--mint);color:var(--mint)}
+.hero-stats{position:absolute;right:3rem;bottom:4rem;display:flex;flex-direction:column;gap:1.4rem;opacity:0;animation:fl 1s .75s ease forwards}
+.hstat{text-align:right;border-right:2px solid var(--mint);padding-right:1.1rem}
+.hstat-v{font-family:var(--fd);font-size:2rem;font-weight:400;color:var(--white);line-height:1}
+.hstat-l{font-family:var(--fm);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-top:3px}
+.scroll-ind{position:absolute;bottom:2.5rem;left:3rem;display:flex;align-items:center;gap:.7rem;opacity:0;animation:fu 1s .9s ease forwards}
+.scroll-line{width:1px;height:44px;background:linear-gradient(180deg,transparent,var(--mint));animation:sp 2s infinite}
+.scroll-t{font-family:var(--fm);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);writing-mode:vertical-rl}
+
+/* WHAT WE DO */
+.what-s{padding:8rem 0;background:var(--navy)}
+.container{max-width:1100px;margin:0 auto;padding:0 3rem}
+.stag{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.stag::before{content:'';display:block;width:22px;height:1px;background:var(--mint)}
+.sh{font-family:var(--fd);font-size:clamp(2rem,3.8vw,3.2rem);font-weight:400;line-height:1.15;color:var(--white);margin-bottom:1.3rem}
+.sh em{font-style:italic;color:var(--mint)}
+.sb{font-size:1rem;font-weight:300;color:rgba(245,243,239,.62);line-height:1.78;max-width:600px}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+.loop-visual{position:relative;height:380px;display:flex;align-items:center;justify-content:center}
+.loop-ring{width:260px;height:260px;border:1px solid rgba(2,166,118,.2);border-radius:50%;position:absolute;display:flex;align-items:center;justify-content:center}
+.loop-ring-inner{width:180px;height:180px;border:1px solid rgba(2,166,118,.4);border-radius:50%;position:absolute;display:flex;align-items:center;justify-content:center}
+.loop-center{width:80px;height:80px;background:rgba(2,166,118,.12);border:1px solid var(--mint);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;z-index:1}
+.loop-node{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.loop-node-dot{width:10px;height:10px;background:var(--mint);border-radius:50%}
+.loop-node-label{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);white-space:nowrap}
+.loop-node-sub{font-size:.72rem;color:rgba(245,243,239,.45);white-space:nowrap;font-weight:300;margin-top:-2px}
+.n1{top:0;left:50%;transform:translateX(-50%)}
+.n2{bottom:20px;right:0}
+.n3{bottom:20px;left:0}
+.what-points{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.wp{display:flex;gap:1.2rem;align-items:flex-start}
+.wp-num{font-family:var(--fm);font-size:.65rem;color:var(--mint);margin-top:3px;flex-shrink:0}
+.wp-text{font-size:.9rem;font-weight:300;color:rgba(245,243,239,.65);line-height:1.65}
+.wp-text strong{color:var(--white);font-weight:500}
+
+/* PROBLEM */
+.prob-s{padding:8rem 0;background:var(--deep)}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.04);margin-top:4rem}
+.prob-card{background:var(--deep);padding:2.5rem;position:relative;overflow:hidden;transition:background .3s}
+.prob-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:transparent;transition:background .35s}
+.prob-card:hover{background:rgba(2,166,118,.04)}
+.prob-card:hover::before{background:var(--mint)}
+.prob-icon{font-size:2rem;margin-bottom:1.3rem}
+.prob-title{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.65rem}
+.prob-text{font-size:.82rem;font-weight:300;color:rgba(245,243,239,.48);line-height:1.7}
+
+/* TWO PATHS */
+.paths-s{padding:8rem 0;background:var(--navy)}
+.paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:4rem}
+.path-card{padding:2.5rem;border:1px solid rgba(245,243,239,.08);position:relative;overflow:hidden;cursor:pointer;transition:all .3s;text-decoration:none;display:block;color:inherit}
+.path-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.path-card.green::after{background:var(--mint)}
+.path-card.warm::after{background:var(--gold)}
+.path-card:hover{background:rgba(255,255,255,.03);border-color:rgba(245,243,239,.15)}
+.path-card:hover.green::after,.path-card.green::after:hover{transform:scaleX(1)}
+.path-card:hover::after{transform:scaleX(1)}
+.path-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2rem;display:inline-block;padding:.3rem .75rem}
+.path-tag.green{background:rgba(2,166,118,.12);color:var(--mint);border:1px solid rgba(2,166,118,.25)}
+.path-tag.warm{background:rgba(193,123,42,.1);color:var(--gold);border:1px solid rgba(193,123,42,.25)}
+.path-title{font-family:var(--fd);font-size:1.7rem;font-weight:400;color:var(--white);margin-bottom:.8rem;line-height:1.2}
+.path-desc{font-size:.88rem;font-weight:300;color:rgba(245,243,239,.52);line-height:1.7;margin-bottom:1.8rem}
+.path-arrow{font-size:.82rem;font-weight:500;color:var(--mint);display:flex;align-items:center;gap:.5rem;transition:gap .25s}
+.path-card:hover .path-arrow{gap:.85rem}
+.path-card.warm .path-arrow{color:var(--gold)}
+
+/* JOURNEY */
+.journey-s{padding:8rem 0;background:var(--deep)}
+.journey-list{margin-top:4rem;display:flex;flex-direction:column;gap:0}
+.jitem{display:grid;grid-template-columns:160px 1fr;gap:2.5rem;align-items:flex-start;padding:2rem 0;border-bottom:1px solid rgba(245,243,239,.06);position:relative}
+.jitem:last-child{border-bottom:none}
+.jstatus{display:flex;flex-direction:column;gap:.5rem;align-items:flex-start}
+.jdot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.jdot.done{background:var(--mint)}
+.jdot.active{background:var(--gold);animation:pulse 2s infinite}
+.jdot.next{background:rgba(245,243,239,.2);border:1px solid rgba(245,243,239,.2)}
+.jlabel{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
+.jlabel.done{color:var(--mint)}
+.jlabel.active{color:var(--gold)}
+.jlabel.next{color:rgba(245,243,239,.3)}
+.jcontent{}
+.jtitle{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
+.jdesc{font-size:.83rem;font-weight:300;color:rgba(245,243,239,.48);line-height:1.65}
+.jstatus-row{display:flex;align-items:center;gap:.6rem}
+
+/* FOUNDERS — HOMEPAGE VERSION */
+.founders-s{padding:9rem 0;background:var(--cream)}
+.founders-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:6rem;align-items:center}
+.fv-wrap{position:relative}
+.fv-box{background:var(--sand);padding:3rem;position:relative}
+.fv-box::before{content:'';position:absolute;top:-10px;left:-10px;right:10px;bottom:10px;border:2px solid rgba(61,107,79,.2);z-index:0}
+.fv-monogram{font-family:var(--fd);font-size:7rem;font-weight:400;color:var(--sage);opacity:.1;position:absolute;bottom:.5rem;right:1.5rem;line-height:1;pointer-events:none}
+.fv-inner{position:relative;z-index:1}
+.fv-eyebrow{font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem}
+.fv-names{font-family:var(--fd);font-size:2.4rem;font-weight:600;color:var(--slate);line-height:1.1;margin-bottom:.35rem}
+.fv-role{font-size:.85rem;color:rgba(44,58,46,.6);margin-bottom:1.5rem;font-weight:400}
+.fv-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;background:rgba(61,107,79,.1);border:1px solid rgba(61,107,79,.2);color:var(--sage)}
+.ft-stag{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem}
+.ft-stag::before{content:'';display:block;width:22px;height:1px;background:var(--sage)}
+.ft-sh{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;line-height:1.2;color:var(--slate);margin-bottom:1.3rem}
+.ft-sh em{font-style:italic;color:var(--sage)}
+.ft-p{font-size:.97rem;font-weight:400;color:rgba(44,58,46,.65);line-height:1.8;margin-bottom:1rem}
+.ft-p strong{color:var(--slate);font-weight:600}
+.ft-quote{margin-top:1.8rem;padding:1.4rem 1.7rem;background:rgba(61,107,79,.07);border-left:3px solid var(--sage)}
+.ft-q-text{font-family:var(--fd);font-size:1.05rem;font-style:italic;color:var(--slate);line-height:1.6}
+.ft-q-attr{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(44,58,46,.45);margin-top:.65rem}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid rgba(245,243,239,.05);padding:4rem 3rem 2.5rem}
+.fi{max-width:1100px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(245,243,239,.05)}
+.ft-brand p{font-size:.83rem;font-weight:300;color:rgba(245,243,239,.35);line-height:1.7;margin-top:.9rem}
+.ft-col h4{font-family:var(--fm);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:1.1rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-col ul li a{font-size:.83rem;font-weight:300;color:rgba(245,243,239,.38);text-decoration:none;transition:color .2s;cursor:pointer}
+.ft-col ul li a:hover{color:var(--mint)}
+.ft-bot{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem}
+.ft-bot p{font-family:var(--fm);font-size:.57rem;letter-spacing:.1em;color:rgba(245,243,239,.18)}
+.ft-ubc{display:flex;align-items:center;gap:.5rem;font-family:var(--fm);font-size:.57rem;letter-spacing:.08em;color:rgba(245,243,239,.18)}
+.ud{width:5px;height:5px;background:var(--mint);border-radius:50%;opacity:.35}
+.pipeda{font-family:var(--fm);font-size:.52rem;letter-spacing:.05em;color:rgba(245,243,239,.15);margin-top:.4rem;display:block;max-width:500px;line-height:1.5}
+
+/* ════════════════════════════════
+   CLEAN LOOP PAGE
+════════════════════════════════ */
+.cl-hero{position:relative;min-height:85vh;display:flex;align-items:center;padding:8rem 3rem 5rem;z-index:1;background:linear-gradient(180deg,var(--deep) 0%,var(--navy) 100%)}
+.cl-hero-inner{max-width:1100px;margin:0 auto;width:100%}
+.cl-hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center}
+.cl-stats-stack{display:flex;flex-direction:column;gap:1.2rem}
+.cl-stat{background:rgba(255,255,255,.04);border:1px solid rgba(2,166,118,.15);padding:1.5rem 1.8rem;border-left:3px solid var(--mint)}
+.cl-stat-v{font-family:var(--fd);font-size:2.2rem;font-weight:400;color:var(--white);line-height:1}
+.cl-stat-l{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-top:.3rem}
+.founding-bar{background:rgba(2,166,118,.09);border:1px solid rgba(2,166,118,.25);border-left:3px solid var(--mint);padding:.9rem 1.4rem;display:flex;align-items:center;gap:.9rem;margin-top:2.5rem}
+.fdot{width:7px;height:7px;background:var(--mint);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+.fb-text{font-family:var(--fm);font-size:.68rem;letter-spacing:.06em;color:rgba(245,243,239,.65)}
+.fb-text strong{color:var(--mint)}
+
+/* HOW SECTION */
+.how-s{padding:8rem 0;background:var(--deep)}
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;position:relative}
+.steps-row::before{content:'';position:absolute;top:1.9rem;left:2rem;right:2rem;height:1px;background:linear-gradient(90deg,var(--mint),rgba(2,166,118,.05));z-index:0}
+.step{position:relative;padding-right:1.5rem;z-index:1}
+.step-num{width:3.8rem;height:3.8rem;background:var(--navy);border:1px solid var(--mint);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.72rem;color:var(--mint);margin-bottom:1.4rem;transition:all .3s}
+.step:hover .step-num{background:var(--mint);color:var(--deep)}
+.step-title{font-size:.92rem;font-weight:600;color:var(--white);margin-bottom:.6rem}
+.step-body{font-size:.8rem;font-weight:300;color:rgba(245,243,239,.48);line-height:1.65}
+
+/* BENEFITS */
+.ben-s{padding:8rem 0;background:var(--navy)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(245,243,239,.04);border:1px solid rgba(245,243,239,.04);margin-top:4rem}
+.ben-card{background:var(--navy);padding:2.2rem;transition:background .3s;position:relative;overflow:hidden}
+.ben-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--mint);transition:height .35s}
+.ben-card:hover{background:rgba(2,166,118,.05)}
+.ben-card:hover::before{height:100%}
+.ben-icon{width:2.8rem;height:2.8rem;background:rgba(2,166,118,.08);border:1px solid rgba(2,166,118,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem;transition:all .3s}
+.ben-card:hover .ben-icon{background:rgba(2,166,118,.18);border-color:var(--mint)}
+.ben-title{font-size:.92rem;font-weight:600;color:var(--white);margin-bottom:.6rem}
+.ben-text{font-size:.8rem;font-weight:300;color:rgba(245,243,239,.48);line-height:1.7}
+
+/* RECEIPT */
+.rcpt-s{padding:8rem 0;background:var(--deep);overflow:hidden}
+.rcpt-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4rem}
+.rcpt-card{background:var(--cream);padding:2.5rem;box-shadow:28px 28px 0 rgba(2,166,118,.09),0 20px 60px rgba(0,0,0,.4);transform:rotate(-1.5deg);transition:transform .4s;color:#0F1E14}
+.rcpt-card:hover{transform:rotate(0) scale(1.01)}
+.rh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:2px solid #0F1E14}
+.rl-t{font-family:var(--fd);font-size:1rem;font-weight:600;color:#0F1E14;line-height:1.1}
+.rl-s{font-family:var(--fm);font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-top:3px}
+.r-badge{background:var(--sage);color:var(--white);font-family:var(--fm);font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .6rem}
+.r-title{font-family:var(--fd);font-size:1.2rem;font-weight:600;color:#0F1E14;margin-bottom:.25rem}
+.r-sub{font-family:var(--fm);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#7A8A8F;margin-bottom:1.2rem}
+.r-field{margin-bottom:.6rem}
+.r-fl{font-family:var(--fm);font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;color:#7A8A8F;margin-bottom:2px}
+.r-fv{font-size:.8rem;color:#0F1E14;font-weight:500;border-bottom:1px solid rgba(0,0,0,.09);padding-bottom:3px}
+.r-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin:1.2rem 0;padding:.85rem;background:rgba(61,107,79,.07)}
+.r-si{text-align:center}
+.r-sv{font-family:var(--fd);font-size:1.3rem;font-weight:600;color:var(--sage);line-height:1}
+.r-sl{font-family:var(--fm);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:#2C3A2E;margin-top:2px}
+.r-footer{display:flex;justify-content:space-between;align-items:flex-end;margin-top:1.2rem;padding-top:.8rem;border-top:1px solid rgba(0,0,0,.08)}
+.r-fn{font-family:var(--fm);font-size:.4rem;letter-spacing:.06em;color:#7A8A8F;max-width:220px;line-height:1.55}
+.honest-box{background:rgba(193,123,42,.1);border:1px solid rgba(193,123,42,.28);border-left:3px solid var(--gold);padding:.9rem 1.2rem;margin-top:1.2rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.04em;color:rgba(245,243,239,.6);line-height:1.6}
+.honest-box strong{color:var(--gold)}
+.rcpt-info h3{font-family:var(--fd);font-size:1.9rem;font-weight:400;color:var(--white);line-height:1.2;margin-bottom:1rem}
+.rcpt-info h3 em{font-style:italic;color:var(--mint)}
+.rcpt-info p{font-size:.9rem;font-weight:300;color:rgba(245,243,239,.58);line-height:1.75;margin-bottom:1.6rem}
+.rcpt-pts{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.rcpt-pts li{display:flex;align-items:flex-start;gap:.75rem;font-size:.84rem;font-weight:300;color:rgba(245,243,239,.68);line-height:1.55}
+.rcpt-pts li::before{content:'→';color:var(--mint);font-size:.8rem;flex-shrink:0;margin-top:1px}
+
+/* WHO */
+.who-s{padding:8rem 0;background:var(--navy)}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:4rem}
+.who-card{padding:1.8rem;border:1px solid rgba(245,243,239,.07);transition:all .3s;position:relative;overflow:hidden}
+.who-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--mint);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.who-card:hover{border-color:rgba(2,166,118,.28);background:rgba(2,166,118,.04)}
+.who-card:hover::after{transform:scaleX(1)}
+.who-icon{font-size:1.8rem;margin-bottom:1rem}
+.who-title{font-size:.92rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
+.who-desc{font-size:.79rem;font-weight:300;color:rgba(245,243,239,.45);line-height:1.6;margin-bottom:1rem}
+.who-tag{display:inline-block;background:rgba(2,166,118,.1);border:1px solid rgba(2,166,118,.22);color:var(--mint);font-family:var(--fm);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.26rem .62rem}
+
+/* FAQ */
+.faq-s{padding:8rem 0;background:var(--deep)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:4rem}
+.faq-item{border:1px solid rgba(245,243,239,.07);overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:rgba(2,166,118,.3)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 1.5rem;cursor:pointer;gap:1rem;user-select:none}
+.fq-t{font-size:.87rem;font-weight:500;color:var(--white);line-height:1.45;transition:color .2s}
+.faq-q:hover .fq-t{color:var(--mint)}
+.fq-i{width:22px;height:22px;background:rgba(2,166,118,.1);border:1px solid rgba(2,166,118,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.72rem;color:var(--mint);transition:all .3s}
+.faq-item.open .fq-i{background:var(--mint);color:var(--deep);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:250px}
+.faq-a-in{padding:0 1.5rem 1.3rem;font-size:.82rem;font-weight:300;color:rgba(245,243,239,.55);line-height:1.75;border-top:1px solid rgba(245,243,239,.05);padding-top:.9rem}
+
+/* CTA */
+.cta-s{padding:9rem 0;background:var(--mint);position:relative;overflow:hidden}
+.cta-s::before{content:'CLEAN LOOP';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-size:16vw;font-weight:400;color:rgba(6,20,38,.06);white-space:nowrap;pointer-events:none}
+.cta-in{text-align:center;position:relative;z-index:1}
+.cta-in h2{font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,4rem);font-weight:400;color:var(--deep);line-height:1.1;margin-bottom:1rem}
+.cta-in > p{font-size:1.05rem;font-weight:300;color:rgba(6,20,38,.62);margin-bottom:3rem;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-form{background:var(--white);padding:2rem 2.5rem;max-width:540px;margin:0 auto 1.2rem;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.cta-form h4{font-family:var(--fd);font-size:1.1rem;font-weight:600;color:#0F1E14;margin-bottom:1.4rem;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.7rem}
+.form-row.full{grid-template-columns:1fr}
+.ff{display:flex;flex-direction:column;gap:.32rem}
+.ff label{font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#7A8A8F}
+.ff input,.ff select{padding:.72rem .95rem;border:1px solid rgba(0,0,0,.11);font-family:var(--fb);font-size:.86rem;color:#0F1E14;background:var(--white);outline:none;transition:border-color .2s;-webkit-appearance:none}
+.ff input:focus,.ff select:focus{border-color:var(--sage)}
+.ff input::placeholder{color:rgba(15,30,20,.28)}
+.form-btn{width:100%;background:#0F1E14;color:var(--white);border:none;padding:.95rem;font-family:var(--fb);font-size:.88rem;font-weight:600;letter-spacing:.04em;cursor:pointer;margin-top:.7rem;transition:background .2s}
+.form-btn:hover{background:var(--navy)}
+.form-note{font-family:var(--fm);font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(6,20,38,.35);text-align:center;margin-top:.5rem}
+.success-msg{display:none;background:var(--navy);color:var(--white);padding:2.5rem;text-align:center;max-width:540px;margin:0 auto}
+.success-msg h4{font-family:var(--fd);font-size:1.5rem;margin-bottom:.5rem}
+.success-msg p{font-size:.9rem;opacity:.7}
+.cta-note{font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;color:rgba(6,20,38,.42);text-transform:uppercase}
+
+/* ── ANIMATIONS ── */
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fl{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:1rem 1.5rem}
+  .nls{display:none}
+  .hb{display:flex}
+  .container{padding:0 1.5rem}
+  .what-grid,.founders-grid,.cl-hero-grid,.rcpt-grid,.paths-grid{grid-template-columns:1fr;gap:3rem}
+  .hero-stats,.scroll-ind{display:none}
+  .hero,.cl-hero{padding:7rem 1.5rem 4rem}
+  .steps-row{grid-template-columns:1fr 1fr;gap:2rem}
+  .steps-row::before{display:none}
+  .step{padding-right:0}
+  .ben-grid,.prob-grid{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr 1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .cta-form{padding:1.5rem}
+  .form-row{grid-template-columns:1fr}
+  section,.what-s,.prob-s,.paths-s,.journey-s,.founders-s,.how-s,.ben-s,.rcpt-s,.who-s,.faq-s,.cta-s,.cl-hero{padding:5rem 0!important}
+  .loop-visual{height:280px}
+}
+@media(max-width:520px){
+  .who-grid{grid-template-columns:1fr}
+  .steps-row{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr}
+  h1.hero-h{font-size:2.6rem}
+}
+</style>
+</head>
+<body>
+
+<canvas id="fc"></canvas>
+
+<!-- MOBILE MENU -->
+<div class="mm" id="mm">
+  <button class="mm-close" id="mmClose">✕</button>
+  <a href="#" onclick="showPage('home');closeMM()">Home</a>
+  <a href="#" onclick="showPage('cleanloop');closeMM()">Clean Loop Program</a>
+  <a href="#" onclick="showPage('home');scrollTo('founders');closeMM()">Our Story</a>
+  <a href="#" onclick="showPage('cleanloop');scrollTo('faq-cl');closeMM()">FAQ</a>
+  <a href="#" onclick="showPage('cleanloop');scrollTo('cta-cl');closeMM()" style="color:var(--mint)">Partner With Us</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nl" href="#" onclick="showPage('home')">
+    <span class="nl-m">LintTech</span>
+    <span class="nl-s">Materials Inc. · Vancouver</span>
+  </a>
+  <ul class="nls">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('cleanloop')">Clean Loop Program</a></li>
+    <li><a href="#" onclick="showPage('home');setTimeout(()=>document.getElementById('founders-s').scrollIntoView({behavior:'smooth'}),100)">Our Story</a></li>
+    <li><a href="#" onclick="showPage('cleanloop');setTimeout(()=>document.getElementById('faq-cl').scrollIntoView({behavior:'smooth'}),100)">FAQ</a></li>
+    <li><a href="#" class="nav-cta" onclick="showPage('cleanloop');setTimeout(()=>document.getElementById('cta-cl').scrollIntoView({behavior:'smooth'}),100)">Partner With Us</a></li>
+  </ul>
+  <div class="hb" id="hb"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ════════════════════════════════
+     HOMEPAGE
+════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hi">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Vancouver, BC · Canada · Est. 2026</span></div>
+      <h1 class="hero-h">We collect what<br>everyone else <em>throws away.</em></h1>
+      <p class="hero-sub">LintTech is building Canada's first commercial dryer lint recovery platform — collecting lint from hotels, hospitals, and laundromats, diverting it from landfill, and researching its potential as a recovered raw material.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-p" onclick="showPage('cleanloop')">Join the Clean Loop Program <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" class="btn-s" onclick="document.getElementById('what-s').scrollIntoView({behavior:'smooth'})">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-v">15.5 MT</div><div class="hstat-l">Lint generated daily<br>Metro Vancouver</div></div>
+      <div class="hstat"><div class="hstat-v">100%</div><div class="hstat-l">Currently sent<br>to landfill</div></div>
+      <div class="hstat"><div class="hstat-v">$0</div><div class="hstat-l">Recovery infrastructure<br>in Canada today</div></div>
+    </div>
+    <div class="scroll-ind"><div class="scroll-line"></div><span class="scroll-t">Scroll</span></div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="what-s" id="what-s">
+    <div class="container">
+      <div class="what-grid">
+        <div class="reveal">
+          <div class="stag">What We Do</div>
+          <h2 class="sh">A simple loop.<br><em>A big problem solved.</em></h2>
+          <p class="sb">Every drying cycle in every hotel, hospital, and laundromat in Canada generates lint. All of it goes to landfill. We are building the infrastructure to change that — one collection agreement at a time.</p>
+          <div class="what-points" style="margin-top:2.5rem">
+            <div class="wp"><span class="wp-num">01 —</span><p class="wp-text"><strong>Collect</strong> lint from commercial properties for free on a scheduled basis — hotels, hospitals, laundromats, gyms</p></div>
+            <div class="wp"><span class="wp-num">02 —</span><p class="wp-text"><strong>Divert</strong> it from landfill, weigh and log every collection, issue quarterly waste diversion records to partners</p></div>
+            <div class="wp"><span class="wp-num">03 —</span><p class="wp-text"><strong>Research</strong> its potential as a recovered raw material in partnership with academic researchers — we are actively exploring what this material can become</p></div>
+          </div>
+        </div>
+        <div class="loop-visual reveal">
+          <div class="loop-ring">
+            <div class="loop-ring-inner">
+              <div class="loop-center">♻️</div>
+            </div>
+          </div>
+          <div class="loop-node n1">
+            <div class="loop-node-dot"></div>
+            <div class="loop-node-label">Collect</div>
+            <div class="loop-node-sub">Hotels & laundromats</div>
+          </div>
+          <div class="loop-node n2">
+            <div class="loop-node-dot"></div>
+            <div class="loop-node-label">Research</div>
+            <div class="loop-node-sub">Material potential</div>
+          </div>
+          <div class="loop-node n3">
+            <div class="loop-node-dot"></div>
+            <div class="loop-node-label">Divert</div>
+            <div class="loop-node-sub">From landfill</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="prob-s">
+    <div class="container">
+      <div class="reveal">
+        <div class="stag">Why It Matters</div>
+        <h2 class="sh">Lint is not just waste.<br><em>It is a liability.</em></h2>
+      </div>
+      <div class="prob-grid" style="margin-top:4rem">
+        <div class="prob-card reveal">
+          <div class="prob-icon">🔥</div>
+          <div class="prob-title">Leading Cause of Dryer Fires</div>
+          <div class="prob-text">Lint accumulation in commercial dryer ducts is the primary ignition source for dryer fires in North American hospitality and healthcare facilities. Removing lint entirely eliminates the fuel load — not just manages it.</div>
+        </div>
+        <div class="prob-card reveal" style="transition-delay:.1s">
+          <div class="prob-icon">⚡</div>
+          <div class="prob-title">20–30% Energy Waste Per Load</div>
+          <div class="prob-text">Clogged lint filters force dryers to run significantly longer per cycle. Hotels and laundromats with regular lint removal run more efficient machines, reducing energy costs measurably over time.</div>
+        </div>
+        <div class="prob-card reveal" style="transition-delay:.2s">
+          <div class="prob-icon">🌊</div>
+          <div class="prob-title">Microfiber Pollution at Scale</div>
+          <div class="prob-text">US household dryers alone release over 3,500 metric tons of microfibers annually into the environment (DRI, 2025). Lint discarded in general waste contributes to microplastic contamination of soil and waterways.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO PATHS -->
+  <section class="paths-s">
+    <div class="container">
+      <div class="reveal">
+        <div class="stag">Where To Go Next</div>
+        <h2 class="sh">Two ways to<br><em>get involved.</em></h2>
+      </div>
+      <div class="paths-grid" style="margin-top:4rem">
+        <a class="path-card green reveal" href="#" onclick="showPage('cleanloop')">
+          <div class="path-tag green">For Hotels & Commercial Facilities</div>
+          <div class="path-title">Join the Clean Loop Initiative</div>
+          <div class="path-desc">Free lint collection for your property. Quarterly waste diversion records for your sustainability reporting. Zero workflow change. Zero cost. We are onboarding our founding cohort of Vancouver partners now.</div>
+          <div class="path-arrow">Learn about the program <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </a>
+        <a class="path-card warm reveal" href="mailto:hello@linttech.ca" style="transition-delay:.1s">
+          <div class="path-tag warm">For Researchers & Investors</div>
+          <div class="path-title">Follow Our Research Journey</div>
+          <div class="path-desc">We are building a supply chain before we build a product — because the most important thing right now is proving this material can be recovered at scale. If you are a researcher, scientist, or investor interested in what comes next, we want to hear from you.</div>
+          <div class="path-arrow" style="color:var(--gold)">Get in touch <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY / HONEST ROADMAP -->
+  <section class="journey-s">
+    <div class="container">
+      <div class="reveal">
+        <div class="stag">Where We Are</div>
+        <h2 class="sh">An honest look at<br><em>where we stand today.</em></h2>
+        <p class="sb" style="margin-top:.8rem">We believe in transparency. Here is our real status — not a polished roadmap of future promises, but an honest account of what is done, what is in progress, and what comes next.</p>
+      </div>
+      <div class="journey-list" style="margin-top:4rem">
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot done"></div><div class="jlabel done">Complete</div></div></div>
+          <div class="jcontent"><div class="jtitle">Research foundation established</div><div class="jdesc">Deep literature review completed. Peer-reviewed science on dryer lint composition (Wijesinghe et al., 2020) and analogous material recovery studies reviewed and documented.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot done"></div><div class="jlabel done">Complete</div></div></div>
+          <div class="jcontent"><div class="jtitle">Scientific advisor connection made</div><div class="jdesc">Initial conversations with nanocellulose researchers at UBC underway. Research summary in progress. We are being transparent: this is not yet a formal partnership.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot active"></div><div class="jlabel active">In Progress</div></div></div>
+          <div class="jcontent"><div class="jtitle">Company incorporation</div><div class="jdesc">LintTech Materials Inc. is in the process of incorporating as a BC company. This is underway now.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot active"></div><div class="jlabel active">In Progress</div></div></div>
+          <div class="jcontent"><div class="jtitle">Supplier outreach — founding cohort</div><div class="jdesc">Reaching out to Vancouver hotels and commercial laundry facilities to onboard our first collection partners. Clean Loop Initiative launching now.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot next"></div><div class="jlabel next">Coming Next</div></div></div>
+          <div class="jcontent"><div class="jtitle">Lab extraction validation</div><div class="jdesc">Running real extraction experiments on collected commercial lint samples with academic partners. This is the key experiment that validates the material's potential.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot next"></div><div class="jlabel next">Coming Next</div></div></div>
+          <div class="jcontent"><div class="jtitle">First recovered material product</div><div class="jdesc">Fire starters from lint launching as our first product — bridge revenue while the science is validated. Eco-positioned, zero-waste origin story.</div></div>
+        </div>
+        <div class="jitem reveal">
+          <div class="jstatus"><div class="jstatus-row"><div class="jdot next"></div><div class="jlabel next">Future</div></div></div>
+          <div class="jcontent"><div class="jtitle">Scaled materials recovery</div><div class="jdesc">If extraction validation confirms viable yields, scale into recovered material supply for sustainable applications. Timeline depends entirely on what the science tells us.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS -->
+  <section class="founders-s" id="founders-s">
+    <div class="container">
+      <div class="founders-grid">
+        <div class="fv-wrap reveal">
+          <div class="fv-box">
+            <div class="fv-monogram">V&P</div>
+            <div class="fv-inner">
+              <div class="fv-eyebrow">Founders · LintTech Materials Inc.</div>
+              <div class="fv-names">Varun &<br>Preksha</div>
+              <div class="fv-role">Co-Founders · Vancouver, BC</div>
+              <div class="fv-chips">
+                <span class="chip">Business Strategy</span>
+                <span class="chip">Textile Industry</span>
+                <span class="chip">Circular Economy</span>
+                <span class="chip">Vancouver</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="ft-stag">Our Story</div>
+          <h2 class="ft-sh">A Vancouver couple who got tired of watching <em>good material go to waste.</em></h2>
+          <p class="ft-p">We came to Vancouver from two different professional worlds — <strong>business strategy</strong> and the <strong>textile industry</strong> — and found ourselves asking the same question: why is something as continuously generated, as material-rich, and as problematic as dryer lint completely ignored by every recycling system in the country?</p>
+          <p class="ft-p">Preksha's background in fashion and textiles gave us a materials lens. Varun's background in business and systems thinking gave us the commercial lens. Together, we started looking at lint not as a nuisance but as a resource. What we found was a genuine gap — a waste stream generating 5,600 metric tons per year in Metro Vancouver alone, with zero recovery infrastructure and growing scientific interest in what it could become.</p>
+          <p class="ft-p"><strong>We are not scientists.</strong> We are two people who care deeply about the climate crisis and believe that solving the world's waste problems does not always require inventing something new — sometimes it just requires looking at what is already there and deciding it deserves better than a landfill.</p>
+          <div class="ft-quote">
+            <div class="ft-q-text">"Every hotel towel that goes through a dryer leaves a little of itself behind. We want to give that something back to the world."</div>
+            <div class="ft-q-attr">— Varun & Preksha, Co-Founders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end homepage -->
+
+<!-- ════════════════════════════════
+     CLEAN LOOP PAGE
+════════════════════════════════ -->
+<div class="page" id="page-cleanloop">
+
+  <!-- HERO -->
+  <section class="cl-hero">
+    <div class="cl-hero-inner">
+      <div class="cl-hero-grid">
+        <div>
+          <div class="eyebrow" style="opacity:1"><div class="eyebrow-line"></div><span class="eyebrow-text">The Clean Loop Initiative — by LintTech</span></div>
+          <h2 class="sh" style="font-family:var(--fd);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;margin-bottom:1.3rem;margin-top:.5rem">Your laundry waste<br><em>has a second life.</em></h2>
+          <p class="sb" style="max-width:500px">Free lint collection for Vancouver hotels and commercial laundry facilities. We collect, you divert from landfill, and your property receives a quarterly waste collection record for sustainability reporting.</p>
+          <div style="display:flex;gap:1rem;margin-top:2.2rem;flex-wrap:wrap">
+            <a href="#" class="btn-p" onclick="document.getElementById('cta-cl').scrollIntoView({behavior:'smooth'})">Become a Founding Partner</a>
+            <a href="#" class="btn-s" onclick="document.getElementById('how-cl').scrollIntoView({behavior:'smooth'})">How It Works</a>
+          </div>
+          <div class="founding-bar" style="max-width:500px">
+            <div class="fdot"></div>
+            <p class="fb-text"><strong>Now onboarding founding partners.</strong> First cohort of Vancouver hotels and laundry facilities — receive priority scheduling and named acknowledgement in our impact reports.</p>
+          </div>
+        </div>
+        <div class="cl-stats-stack reveal">
+          <div class="cl-stat"><div class="cl-stat-v">15.5 MT</div><div class="cl-stat-l">Lint generated daily in Metro Vancouver</div></div>
+          <div class="cl-stat"><div class="cl-stat-v">100%</div><div class="cl-stat-l">Currently sent to landfill — no recovery</div></div>
+          <div class="cl-stat"><div class="cl-stat-v">$0</div><div class="cl-stat-l">Cost to your property</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-s" id="how-cl">
+    <div class="container">
+      <div class="reveal"><div class="stag">Process</div><h2 class="sh">Four steps.<br><em>Zero disruption.</em></h2></div>
+      <div class="steps-row">
+        <div class="step reveal"><div class="step-num">01</div><div class="step-title">We provide a container</div><div class="step-body">LintTech supplies a labelled collection bin for your laundry room. We install it next to your dryers. No purchase required.</div></div>
+        <div class="step reveal" style="transition-delay:.1s"><div class="step-num">02</div><div class="step-title">Your team drops lint in</div><div class="step-body">Housekeeping cleans filters as normal — they drop lint into our container instead of the bin. Same time. One different destination.</div></div>
+        <div class="step reveal" style="transition-delay:.2s"><div class="step-num">03</div><div class="step-title">We collect on schedule</div><div class="step-body">Free pickup on a weekly or biweekly schedule you choose. Each collection is weighed on-site and logged. Signed receipt same day.</div></div>
+        <div class="step reveal" style="transition-delay:.3s"><div class="step-num">04</div><div class="step-title">You receive a diversion record</div><div class="step-body">Every quarter we issue your Waste Collection Record — kg diverted, CO₂e estimate, collection log. Ready for LEED, Green Key, or ESG use.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="ben-s" id="benefits-cl">
+    <div class="container">
+      <div class="reveal"><div class="stag">What Your Property Gets</div><h2 class="sh">Six reasons to say yes.<br><em>Zero reasons to say no.</em></h2></div>
+      <div class="ben-grid">
+        <div class="ben-card reveal"><div class="ben-icon">🔥</div><div class="ben-title">Fire Risk Reduced</div><div class="ben-text">Lint removed from the building entirely — not just moved to a different bin. Eliminates the combustible fuel load that causes thousands of commercial dryer fires annually across North America.</div></div>
+        <div class="ben-card reveal" style="transition-delay:.1s"><div class="ben-icon">📋</div><div class="ben-title">Waste Diversion Documentation</div><div class="ben-text">Quarterly records with exact weights and CO₂e estimates based on Environment and Climate Change Canada emissions factors. Useful for LEED MR, Green Key, and ESG disclosures.</div></div>
+        <div class="ben-card reveal" style="transition-delay:.2s"><div class="ben-icon">⚡</div><div class="ben-title">Reduced Energy Costs</div><div class="ben-text">Lint-clogged vents force dryers to run 20–30% longer per load. Regular lint removal improves efficiency and extends equipment lifespan.</div></div>
+        <div class="ben-card reveal"><div class="ben-icon">🌿</div><div class="ben-title">Clean Loop Partner Status</div><div class="ben-text">Use the Clean Loop Partner designation in your sustainability materials. Founding partners receive named acknowledgement in LintTech's published impact reports.</div></div>
+        <div class="ben-card reveal" style="transition-delay:.1s"><div class="ben-icon">🌊</div><div class="ben-title">Microfiber Pollution Reduced</div><div class="ben-text">Lint in general waste contributes to microfiber leaching into soil and waterways. Clean Loop diversion prevents this, supporting your environmental commitments beyond carbon.</div></div>
+        <div class="ben-card reveal" style="transition-delay:.2s"><div class="ben-icon">💰</div><div class="ben-title">Completely Free</div><div class="ben-text">No equipment cost. No service fees. No obligation beyond 30-day cancellation notice. You gain a sustainability credential at zero net cost.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION RECORD -->
+  <section class="rcpt-s" id="record-cl">
+    <div class="container">
+      <div class="rcpt-grid">
+        <div class="rcpt-card reveal">
+          <div class="rh"><div><div class="rl-t">LintTech Materials Inc.</div><div class="rl-s">Clean Loop Initiative · Vancouver, BC</div></div><div class="r-badge">Collection Record</div></div>
+          <div class="r-title">Waste Collection Record</div>
+          <div class="r-sub">Commercial Lint Diversion — Quarterly Summary</div>
+          <div class="r-field"><div class="r-fl">Property</div><div class="r-fv">Sample Hotel — Vancouver, BC</div></div>
+          <div class="r-field"><div class="r-fl">Reporting Period</div><div class="r-fv">Q3 2026 · July 1 – September 30</div></div>
+          <div class="r-stats">
+            <div class="r-si"><div class="r-sv">142</div><div class="r-sl">kg diverted<br>from landfill</div></div>
+            <div class="r-si"><div class="r-sv">~71</div><div class="r-sl">kg CO₂e<br>estimated</div></div>
+            <div class="r-si"><div class="r-sv">13</div><div class="r-sl">collection<br>events</div></div>
+          </div>
+          <div class="r-field"><div class="r-fl">Methodology</div><div class="r-fv" style="font-size:.72rem">Calibrated digital scale at point of collection. Every event logged and signed.</div></div>
+          <div class="r-footer"><div class="r-fn">LintTech Materials Inc. · Vancouver, BC<br>CO₂e estimate based on ECCC National Inventory Report — organic solid waste emissions factor (0.5 kg CO₂e/kg, conservative). For internal sustainability tracking only.</div></div>
+        </div>
+        <div class="rcpt-info reveal">
+          <div class="stag">Quarterly Collection Record</div>
+          <h3>Honest documentation.<br><em>No overclaiming.</em></h3>
+          <p>We issue a Waste Collection Record — not a carbon credit, not a verified emission reduction. We will not issue documents that overstate what we can verify. What we provide is real, traceable, and genuinely useful for your sustainability reporting.</p>
+          <div class="honest-box"><strong>Transparency note:</strong> LintTech Materials Inc. is currently incorporating as a BC company. We are an early-stage startup being upfront about where we are — because the partners we work with deserve honesty from day one.</div>
+          <ul class="rcpt-pts" style="margin-top:1.4rem">
+            <li>Exact weights measured on-site at every collection — no estimates</li>
+            <li>CO₂e calculated using ECCC published emissions factors — fully auditable</li>
+            <li>Issued quarterly — aligned with most sustainability reporting cycles</li>
+            <li>Available digitally (PDF) and in print on request</li>
+            <li>Useful for LEED MR, Green Key documentation, and internal ESG tracking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO QUALIFIES -->
+  <section class="who-s" id="who-cl">
+    <div class="container">
+      <div class="reveal"><div class="stag">Eligible Partners</div><h2 class="sh">Who the program<br><em>is designed for.</em></h2><p class="sb" style="margin-top:.8rem">Open to any commercial property in Metro Vancouver and the Lower Mainland with in-house dryer operations generating lint regularly.</p></div>
+      <div class="who-grid">
+        <div class="who-card reveal"><div class="who-icon">🏨</div><div class="who-title">Hotels & Resorts</div><div class="who-desc">Properties with in-house laundry processing towels and linens. 150+ room hotels generate 7–14 kg of lint per day — the highest-purity source in the program.</div><div class="who-tag">Highest Priority</div></div>
+        <div class="who-card reveal" style="transition-delay:.1s"><div class="who-icon">🏥</div><div class="who-title">Hospitals & Healthcare</div><div class="who-desc">Medical facilities processing patient gowns, scrubs, and bed sheets. High cotton content and centralised operations make collection simple.</div><div class="who-tag">High Priority</div></div>
+        <div class="who-card reveal" style="transition-delay:.2s"><div class="who-icon">🧺</div><div class="who-title">Commercial Laundromats</div><div class="who-desc">Urban laundromats with 10+ dryers. A 20-dryer laundromat generates 9–27 kg of lint per day across mixed household loads.</div><div class="who-tag">High Priority</div></div>
+        <div class="who-card reveal" style="transition-delay:.3s"><div class="who-icon">🏭</div><div class="who-title">Commercial Laundry Services</div><div class="who-desc">Industrial operations servicing hospitality and healthcare. The highest absolute volume source — large facilities generate 100+ kg per day.</div><div class="who-tag">Volume Partner</div></div>
+        <div class="who-card reveal" style="transition-delay:.1s"><div class="who-icon">💪</div><div class="who-title">Gyms & Fitness Centres</div><div class="who-desc">Towel-service facilities running uniform cotton towel cycles. Concentrated, predictable lint generation from a single fiber type.</div><div class="who-tag">Eligible</div></div>
+        <div class="who-card reveal" style="transition-delay:.2s"><div class="who-icon">🎓</div><div class="who-title">Universities & Institutions</div><div class="who-desc">Campus residences and sports facilities with centralised dryer banks. Strong ESG reporting requirements align naturally with program objectives.</div><div class="who-tag">Eligible</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-s" id="faq-cl">
+    <div class="container">
+      <div class="reveal"><div class="stag">Common Questions</div><h2 class="sh">Everything you want to know<br><em>before you call us.</em></h2></div>
+      <div class="faq-grid">
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">Does this change our existing waste contract?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">Not at all. Lint is set aside before it enters your general waste stream. Your waste contractor relationship stays completely unchanged. We only collect the lint.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">What if you miss a scheduled pickup?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">We always give 24-hour notice if we need to reschedule. We provide a container large enough to hold at least two weeks of lint. The 30-day cancellation clause means you can exit immediately if we fail to perform.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">What do you actually do with the lint?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">We are researching its potential as a recovered raw material — the science is promising and we are actively exploring what it can become. What we know for certain right now: it leaves your building and it does not go to landfill. We will share our research findings publicly as they develop.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">Can we use your records in LEED or Green Key submissions?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">Our records are based on exact weighed measurements and use ECCC National Inventory Report emissions factors. They are designed as useful supporting documentation for waste diversion credits. We recommend confirming with your specific certification body — we are happy to adapt the format if needed.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">Is there any change to housekeeping workflow?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">One change only: instead of dropping lint into the general bin, your team drops it into our labelled container. The time taken is identical. We have designed the program specifically so the ask on housekeeping is zero beyond that single action.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">Who is LintTech and how long have you been operating?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">LintTech Materials Inc. is a Vancouver startup founded by Varun and Preksha — a couple with backgrounds in business and the textile industry. We are currently incorporating as a BC company. We are being transparent about our early stage because partners deserve honesty from day one.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">What does the program cost us?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">Nothing. Collection is completely free. We provide the container, handle the collection, and issue the quarterly record at no cost. The only ask is a small space in your laundry room for our bin.</div></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="fq-t">What if we want to stop participating?</span><div class="fq-i">+</div></div><div class="faq-a"><div class="faq-a-in">30 days written notice, any time, no questions and no penalty. We collect our container and that is the end of it. We are building this on relationships, not contracts.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-s" id="cta-cl">
+    <div class="container">
+      <div class="cta-in">
+        <h2>Ready to close the loop<br>on your laundry waste?</h2>
+        <p>Leave your details and we will be in touch within 48 hours to arrange a no-obligation site visit.</p>
+        <div class="cta-form" id="ctaForm">
+          <h4>Join the Clean Loop Initiative</h4>
+          <div class="form-row">
+            <div class="ff"><label>Your Name *</label><input type="text" id="f-name" placeholder="Jane Smith"></div>
+            <div class="ff"><label>Property Name *</label><input type="text" id="f-prop" placeholder="The Sutton Place Hotel"></div>
+          </div>
+          <div class="form-row">
+            <div class="ff"><label>Work Email *</label><input type="email" id="f-email" placeholder="jane@yourproperty.com"></div>
+            <div class="ff"><label>Facility Type</label>
+              <select id="f-type">
+                <option value="">Select type...</option>
+                <option>Hotel / Resort</option>
+                <option>Hospital / Healthcare</option>
+                <option>Commercial Laundromat</option>
+                <option>Commercial Laundry Service</option>
+                <option>Gym / Fitness Centre</option>
+                <option>University / Institution</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="ff"><label>Anything you'd like us to know?</label><input type="text" id="f-note" placeholder="Number of dryers, location, questions..."></div>
+          </div>
+          <button class="form-btn" id="formBtn">Request a Site Visit →</button>
+          <p class="form-note">Your information is used solely for this inquiry and protected under PIPEDA.</p>
+        </div>
+        <div class="success-msg" id="successMsg">
+          <h4>Thank you — we'll be in touch within 48 hours.</h4>
+          <p>We look forward to visiting your property and walking you through the program.</p>
+        </div>
+        <p class="cta-note" style="margin-top:1.5rem">Or email us at <strong>hello@linttech.ca</strong> · No commitment · 30-day cancellation</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end cleanloop page -->
+
+<!-- SHARED FOOTER -->
+<footer>
+  <div class="fi">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="nl"><span class="nl-m">LintTech</span><span class="nl-s" style="margin-top:4px">Materials Inc. · Vancouver, BC</span></div>
+        <p>Canada's first commercial dryer lint recovery platform. We collect, divert, and research — building toward a circular economy for a waste stream no one else is addressing.</p>
+      </div>
+      <div class="ft-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('home');setTimeout(()=>document.getElementById('what-s').scrollIntoView({behavior:'smooth'}),100)">What We Do</a></li>
+          <li><a onclick="showPage('home');setTimeout(()=>document.getElementById('founders-s').scrollIntoView({behavior:'smooth'}),100)">Our Story</a></li>
+          <li><a onclick="showPage('home');setTimeout(()=>document.getElementById('journey-s')?.scrollIntoView({behavior:'smooth'}),100)">Where We Are</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Program</h4>
+        <ul>
+          <li><a onclick="showPage('cleanloop')">Clean Loop Initiative</a></li>
+          <li><a onclick="showPage('cleanloop');setTimeout(()=>document.getElementById('how-cl').scrollIntoView({behavior:'smooth'}),100)">How It Works</a></li>
+          <li><a onclick="showPage('cleanloop');setTimeout(()=>document.getElementById('who-cl').scrollIntoView({behavior:'smooth'}),100)">Who Qualifies</a></li>
+          <li><a onclick="showPage('cleanloop');setTimeout(()=>document.getElementById('cta-cl').scrollIntoView({behavior:'smooth'}),100)">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@linttech.ca">hello@linttech.ca</a></li>
+          <li><a href="#">Vancouver, BC</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="mailto:hello@linttech.ca">Media Inquiries</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div>
+        <p>© 2026 LintTech Materials Inc. · All rights reserved · Vancouver, BC, Canada</p>
+        <span class="pipeda">Personal information collected on this site is used solely for partnership inquiries and is protected under Canada's Personal Information Protection and Electronic Documents Act (PIPEDA).</span>
+      </div>
+      <div class="ft-ubc"><div class="ud"></div>Research discussion in progress · University of British Columbia</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CANVAS ──
+const cv=document.getElementById('fc'),cx=cv.getContext('2d');let fb=[];
+function rsz(){cv.width=window.innerWidth;cv.height=window.innerHeight}
+class F{constructor(){this.r()}r(){this.x=Math.random()*cv.width;this.y=Math.random()*cv.height;this.l=35+Math.random()*100;this.a=Math.random()*Math.PI*2;this.c=(Math.random()-.5)*.65;this.sp=.00015+Math.random()*.00025;this.al=.04+Math.random()*.14;this.w=.35+Math.random()*.65;this.h=Math.random()>.7?'2,166,118':'245,243,239';this.d=(Math.random()-.5)*.06}draw(){cx.save();cx.globalAlpha=this.al;cx.strokeStyle=`rgba(${this.h},1)`;cx.lineWidth=this.w;cx.lineCap='round';cx.beginPath();cx.moveTo(this.x,this.y);let px=this.x,py=this.y,a=this.a;for(let i=0;i<12;i++){a+=this.c;px+=Math.cos(a)*(this.l/12);py+=Math.sin(a)*(this.l/12);cx.lineTo(px,py)}cx.stroke();cx.restore();this.a+=this.sp;this.x+=this.d;if(this.x>cv.width+50||this.x<-50||this.y>cv.height+50||this.y<-50)this.r()}}
+function init(){fb=[];for(let i=0;i<90;i++)fb.push(new F())}
+function anim(){cx.clearRect(0,0,cv.width,cv.height);fb.forEach(f=>f.draw());requestAnimationFrame(anim)}
+rsz();init();anim();
+window.addEventListener('resize',()=>{rsz();init()});
+
+// ── PAGE SWITCHING ──
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // re-trigger reveals on new page
+  setTimeout(()=>{
+    document.querySelectorAll('#page-'+name+' .reveal').forEach(el=>{
+      const rect=el.getBoundingClientRect();
+      if(rect.top<window.innerHeight)el.classList.add('visible');
+    });
+  },100);
+}
+
+// ── SCROLL REVEAL ──
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── NAV ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.background=window.scrollY>60?'rgba(6,20,38,.98)':'rgba(6,20,38,.92)'
+});
+
+// ── MOBILE MENU ──
+document.getElementById('hb').addEventListener('click',()=>document.getElementById('mm').classList.add('open'));
+document.getElementById('mmClose').addEventListener('click',()=>document.getElementById('mm').classList.remove('open'));
+function closeMM(){document.getElementById('mm').classList.remove('open')}
+
+// ── FAQ ──
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  });
+});
+
+// ── FORM ──
+document.getElementById('formBtn').addEventListener('click',function(){
+  const n=document.getElementById('f-name').value.trim();
+  const p=document.getElementById('f-prop').value.trim();
+  const e=document.getElementById('f-email').value.trim();
+  const fields=[
+    {el:document.getElementById('f-name'),ok:()=>n},
+    {el:document.getElementById('f-prop'),ok:()=>p},
+    {el:document.getElementById('f-email'),ok:()=>e&&e.includes('@')},
+  ];
+  let valid=true;
+  fields.forEach(f=>{
+    if(!f.ok()){f.el.style.borderColor='#C17B2A';setTimeout(()=>f.el.style.borderColor='',2500);valid=false}
+  });
+  if(!valid)return;
+  document.getElementById('ctaForm').style.display='none';
+  document.getElementById('successMsg').style.display='block';
+  console.log('Submission:',{n,p,e,type:document.getElementById('f-type').value,note:document.getElementById('f-note').value});
+});
+
+// ── STAGGER BEN CARDS ──
+document.querySelectorAll('.ben-grid .ben-card,.who-grid .who-card,.prob-grid .prob-card').forEach((el,i)=>{
+  el.style.transitionDelay=(i%3)*.1+'s';
+});
+
+// ── MARK JOURNEY SECTION ID ──
+const js=document.querySelector('.journey-s');
+if(js)js.id='journey-s';
+</script>
+</body>
+</html>
