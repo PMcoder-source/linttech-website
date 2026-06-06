@@ -917,7 +917,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 });
 
 // ── FORM ──
-const SHEET_URL='https://script.google.com/macros/s/AKfycbzhT6HnDwWgpQKl8OTVdgSKyukVbEQ5ip8cQXlCxFXib-ov-Pw3B1Ywm_Vqda14k0Iy/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzXnepQexJn4Ys-Mb6OWa-LCjaykC1LAJKE044Men89ddCKvbaURpyNw9ECu634UCHL/exec';
 document.getElementById('formBtn').addEventListener('click',async function(){
   const n=document.getElementById('f-name').value.trim();
   const p=document.getElementById('f-prop').value.trim();
@@ -935,13 +935,12 @@ document.getElementById('formBtn').addEventListener('click',async function(){
   const btn=document.getElementById('formBtn');
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    const fd=new FormData();
-    fd.append('name',n);
-    fd.append('property',p);
-    fd.append('email',e);
-    fd.append('type',document.getElementById('f-type').value);
-    fd.append('notes',document.getElementById('f-note').value);
-    await fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:fd});
+    const params=new URLSearchParams({
+      name:n,property:p,email:e,
+      type:document.getElementById('f-type').value,
+      notes:document.getElementById('f-note').value
+    });
+    await fetch(SHEET_URL+'?'+params.toString(),{mode:'no-cors'});
   }catch(_){}
   document.getElementById('ctaForm').style.display='none';
   document.getElementById('successMsg').style.display='block';
