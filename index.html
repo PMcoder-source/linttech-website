@@ -917,7 +917,8 @@ document.querySelectorAll('.faq-item').forEach(item=>{
 });
 
 // ── FORM ──
-document.getElementById('formBtn').addEventListener('click',function(){
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxJ5a67c7wDGaSB-EqpfKkfU8Lnjx4zAxt3W6dCmCnXppZvBrPLveqGZ10Qot8_p3Ap/exec';
+document.getElementById('formBtn').addEventListener('click',async function(){
   const n=document.getElementById('f-name').value.trim();
   const p=document.getElementById('f-prop').value.trim();
   const e=document.getElementById('f-email').value.trim();
@@ -931,9 +932,13 @@ document.getElementById('formBtn').addEventListener('click',function(){
     if(!f.ok()){f.el.style.borderColor='#C17B2A';setTimeout(()=>f.el.style.borderColor='',2500);valid=false}
   });
   if(!valid)return;
+  const btn=document.getElementById('formBtn');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    await fetch(SHEET_URL,{method:'POST',body:JSON.stringify({name:n,property:p,email:e,type:document.getElementById('f-type').value,notes:document.getElementById('f-note').value})});
+  }catch(_){}
   document.getElementById('ctaForm').style.display='none';
   document.getElementById('successMsg').style.display='block';
-  console.log('Submission:',{n,p,e,type:document.getElementById('f-type').value,note:document.getElementById('f-note').value});
 });
 
 // ── STAGGER BEN CARDS ──
